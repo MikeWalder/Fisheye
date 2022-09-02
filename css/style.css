@@ -33,27 +33,49 @@ h1 {
 
 .photographer_section article {
     justify-self: center; 
-    /* display: flex; */
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    color: #D3573C;
+    font-size: 30px;
 }
 
-.photographer_section article .presenter {
+.photographer_section article h2, .photographer_section article h4, 
+.photographer_section article h5, .photographer_section article h6 {
+    padding: 0px;
+    margin: 2px 0px;
+}
+
+.photographer_section h4 {
+    font-size: 16px;
+    color: #901C1C;
+    font-weight: lighter;
+}
+
+.photographer_section h5 {
+    font-size: 16px;
+    color: black;
+    font-weight: lighter;
+}
+
+.photographer_section h6 {
+    font-size: 14px;
+    color: #525252;
+    font-weight: lighter;
+}
+
+/* .photographer_section article {
     color: #D3573C;
-    font-size: 20px;
+    font-size: 22px;
     display: flex;
     justify-content: space-between;
-}
-
-.photographer_section article .like {
-
-}
+} */
 
 .photographer_section article img {
-    height: 350px;
-    width: 400px;
-    border-radius: 2%;
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
     transition: transform .2s;
 }
 
@@ -72,7 +94,7 @@ h1 {
 
     .photographer_section article img {
         height: 250px;
-        width: 300px;
+        width: 250px;
     }
 
     .photographer_section article .presenter {

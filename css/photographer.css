@@ -1,11 +1,36 @@
+body {
+    font-family: "DM Sans", sans-serif;
+    margin: 0;
+}
+
 #contact_modal {
     display: none;
 }
 
 .photograph-header {
     background-color: #FAFAFA;
-    height: 300px;
+    height: 90px;
     margin: 0 100px;
+}
+
+.photographer_description {
+    padding-left: 100px;
+    padding-right: 100px;
+    max-height: 280px;
+    background-color: #FAFAFA;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+}
+
+.logo {
+    height: 50px;
+    margin-left: 100px;
 }
 
 .contact_button {
