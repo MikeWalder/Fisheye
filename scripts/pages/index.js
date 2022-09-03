@@ -1,5 +1,3 @@
-    
-
     async function requestAllPhotographers() {
         return fetch('http://127.0.0.1:5500/data/photographers.json')
         .then(function(response) {
@@ -23,6 +21,7 @@
 
         photographers.photographers.forEach((photographer) => {
             const photographerModel = photographerFactory(photographer);
+            // console.log(photographerModel);
             const userCardDOM = photographerModel.getUserCardDOM();
             photographersSection.appendChild(userCardDOM);
         });
