@@ -64,15 +64,18 @@ function photographerContentFactory(data) {
     function getUserDescDOM() {
         const article = document.createElement( 'article' );
 
-        const h1 = document.createElement( 'h1' );
-        h1.innerText = title;
+        const divRealisation = document.createElement( 'div' );
+        divRealisation.className = 'realisation';
+
+        
+        divRealisation.innerHTML = '<span class="title">' + title + '</span><span>' + likes + '&nbsp;&#10084;</span>';
 
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture)
         img.setAttribute("alt", title)
 
         article.appendChild(img);
-        article.appendChild(h1);
+        article.appendChild(divRealisation);
 
         return (article);
     }

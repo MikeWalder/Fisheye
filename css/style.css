@@ -14,7 +14,7 @@ header {
     height: 90px;
 }
 
-h1 {
+.photograph {
     color: #901C1C;
     margin-right: 100px;
 }
@@ -31,14 +31,19 @@ h1 {
     margin-top: 100px;
 }
 
-.photographer_section article, .photographer-section article {
+.photographer_section article {
     justify-self: center; 
-    display: flex;
-    justify-content: center;
+    justify-content: center; 
     align-items: center;
     flex-direction: column;
     color: #D3573C;
     font-size: 30px;
+}
+
+.photographer-section article {
+    justify-self: center; 
+    display: flex;
+    flex-direction: column;
 }
 
 .photographer-section {
@@ -72,6 +77,8 @@ h1 {
 .photographer_section article img {
     height: 300px;
     width: 300px;
+    border-radius: 50%;
+    transition: transform .2s;
 }
 
 .photographer-section article img {
@@ -79,28 +86,17 @@ h1 {
     width: 500px;
 }
 
-.photographer_section article img {
-    border-radius: 50%;
-    transition: transform .2s;
-}
-
-
-
-.photographer-section article img {
-    border: 1px solid black;
-}
-
-.photographer-section article h1 {
-    margin-left: 0px;
-    font-size: 26px;
-    font-weight: lighter;
-}
-
-
 .photographer_section article img:hover {
     -ms-transform: scale(1.05); /* IE 9 */
     -webkit-transform: scale(1.05); /* Safari 3-8 */
     transform: scale(1.05); 
+}
+
+.realisation {
+    display: flex;
+    justify-content: space-between;
+    color: #901C1C;
+    font-size: 34px;
 }
 
 .photograph-header div {
@@ -199,5 +195,6 @@ h1 {
 
     .photographer-section article h1 {
         font-size: 16px;
+        margin-right: 0px !important;
     }
 }
