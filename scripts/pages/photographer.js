@@ -131,4 +131,9 @@ async function init() {
     displayData(creationsPhotographer);
 }
 
+function displayModal() {
+    const contactModal = document.getElementById( 'contact_modal' );
+    contactModal.style.display = "block";
+}
+
 init();

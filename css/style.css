@@ -38,6 +38,7 @@ header {
     flex-direction: column;
     color: #D3573C;
     font-size: 30px;
+    display: flex;
 }
 
 .photographer-section article {
