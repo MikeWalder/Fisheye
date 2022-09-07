@@ -5,11 +5,41 @@ body {
 
 #contact_modal {
     display: none;
+    position: fixed;
+    min-width: 40vw;
+    z-index: 1;
+    left: 30vw;
+    top: 10vh;
+    overflow: auto;
     background-color: #D3573C;
-    margin-left: 30vw;
     padding-left: 10px;
-    margin-right: 30vw;
     padding-right: 10px;
+    
+}
+
+.modal_title {
+    display: inline-block;
+}
+
+.modal_title, #modal_photograph {
+    text-align: left;
+    padding-left: 15px;
+    font-size: 56px;
+    font-weight: lighter;
+    margin: 0px;
+}
+
+.close {
+    font-size: 72px;
+    padding-left: 1em;
+    color: white;
+    float: right;
+    transition: all 0.4s;
+}
+
+.close:hover {
+    color: black;
+    cursor: pointer;
 }
 
 .photograph-header {
@@ -53,6 +83,7 @@ header {
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    margin: 20px 0px;
 }
 
 .modal {
@@ -84,6 +115,7 @@ header {
 
 form {
     display: flex;
+    margin-top: 30px;
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
@@ -107,4 +139,9 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+
+form textarea {
+    width: 100%;
+    height: 100px;
 }

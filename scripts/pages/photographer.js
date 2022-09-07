@@ -45,7 +45,7 @@ async function displayData(dataPhotographer){
     photographerDescription.appendChild(userHeaderDOM);
 
     const realisations = dataPhotographer.slice(1, dataPhotographer.length);
-    console.log(realisations);
+    //console.log(realisations);
     
     realisations.forEach((realisation) => {
         const realisationModel = photographerContentFactory(realisation);
@@ -56,18 +56,16 @@ async function displayData(dataPhotographer){
 
 function photographerContentFactory(data) {
     const { title, likes, image, date, price } = data;
-    console.log(data);
+    //console.log(data);
 
     const picture = `assets/photographers/${image}`;
-    console.log(picture);
+    //console.log(picture);
 
     function getUserDescDOM() {
         const article = document.createElement( 'article' );
 
         const divRealisation = document.createElement( 'div' );
         divRealisation.className = 'realisation';
-
-        
         divRealisation.innerHTML = '<span class="title">' + title + '</span><span>' + likes + '&nbsp;&#10084;</span>';
 
         const img = document.createElement( 'img' );
@@ -84,11 +82,12 @@ function photographerContentFactory(data) {
 
 function photographerHeaderFactory(data) {
     const { name, city, country, portrait, tagline, price } = data;
-    console.log(data);
 
     const picture = `assets/photographers/${portrait}`;
 
     function getUserHeaderDOM() {
+        document.getElementById( 'modal_photograph' ).innerText = name;
+
         const div = document.createElement( 'div' );
 
         const article = document.createElement( 'article' );
@@ -127,13 +126,21 @@ function photographerHeaderFactory(data) {
 async function init() {
     let findId = getIdParameter();
     const creationsPhotographer = await getAllPicturesFromPhotographer(findId);
-    console.log(creationsPhotographer);
     displayData(creationsPhotographer);
 }
 
 function displayModal() {
     const contactModal = document.getElementById( 'contact_modal' );
     contactModal.style.display = "block";
+    const body = document.body;
+    body.style.backgroundColor="rgba(0, 0, 0, 0.4)";
+}
+
+function closeModal() {
+    const contactModal = document.getElementById( 'contact_modal' );
+    contactModal.style.display = "none";
+    const body = document.body;
+    body.style.backgroundColor="rgba(255, 255, 255, 1)";
 }
 
 init();
