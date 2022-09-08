@@ -55,29 +55,37 @@ async function displayData(dataPhotographer){
 }
 
 function photographerContentFactory(data) {
-    const { title, likes, image, date, price } = data;
-    //console.log(data);
-
-    const picture = `assets/photographers/${image}`;
-    //console.log(picture);
+    const { title, likes, image, video, date, price } = data;
+    console.log(likes);
 
     function getUserDescDOM() {
         const article = document.createElement( 'article' );
 
         const divRealisation = document.createElement( 'div' );
         divRealisation.className = 'realisation';
-        divRealisation.innerHTML = '<span class="title">' + title + '</span><span>' + likes + '&nbsp;&#10084;</span>';
+        divRealisation.innerHTML = '<span class="title">' + title + '</span><span class="likes" onclick="addLike()">' + likes + '&nbsp;&#10084;</span>';
 
-        const img = document.createElement( 'img' );
-        img.setAttribute("src", picture)
-        img.setAttribute("alt", title)
+        if(typeof image !== 'undefined') {
+            const pictureLink = `assets/photographers/${image}`;
+            const img = document.createElement( 'img' );
+            img.setAttribute("src", pictureLink)
+            img.setAttribute("alt", title)
+            article.appendChild(img);
+        }
 
-        article.appendChild(img);
+        if(typeof video !== 'undefined') {
+            const videoLink = `assets/photographers/videos/${video}`;
+            const vid = document.createElement( 'video' );
+            vid.setAttribute("src", videoLink);
+            vid.setAttribute("controls", "controls");
+            article.appendChild(vid);
+        }
+        
         article.appendChild(divRealisation);
 
         return (article);
     }
-    return {  title, likes, image, date, price, getUserDescDOM }
+    return {  title, likes, image, video, date, price, getUserDescDOM }
 }
 
 function photographerHeaderFactory(data) {

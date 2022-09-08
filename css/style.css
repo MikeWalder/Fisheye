@@ -82,7 +82,7 @@ header {
     transition: transform .2s;
 }
 
-.photographer-section article img {
+.photographer-section article img, .photographer-section article video {
     height: 500px;
     width: 500px;
 }
@@ -97,7 +97,17 @@ header {
     display: flex;
     justify-content: space-between;
     color: #901C1C;
-    font-size: 34px;
+    font-size: 28px;
+}
+
+.realisation .title {
+    max-width: 420px;
+}
+
+.realisation .likes:hover {
+    cursor: pointer;
+    transition: all 0.4s;
+    color: red;
 }
 
 .photograph-header div {
