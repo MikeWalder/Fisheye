@@ -24,6 +24,9 @@ async function getAllPicturesFromPhotographer(idPhotographer) {
                 albumData[0] = data.photographers[i];
             }
         }
+
+
+
         for(let i = 0; i < data.media.length; i++){
             if(data.media[i].photographerId == idPhotographer){
                 albumData.push(data.media[i]);
@@ -97,7 +100,6 @@ function photographerHeaderFactory(data) {
         document.getElementById( 'modal_photograph' ).innerText = name;
 
         const div = document.createElement( 'div' );
-
         const article = document.createElement( 'article' );
 
         const h1 = document.createElement( 'h1' );
