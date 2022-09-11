@@ -168,8 +168,8 @@ header {
     font-weight: lighter;
 }
 
-option .select-hr {
-    border-bottom: 5px solid white;
+#order-select * {
+    border-bottom: 1px solid white;
 }
 
 .photographer-details {
@@ -177,10 +177,33 @@ option .select-hr {
     bottom: 0px;
     right: 1vw; 
     height: 80px;
-    width: 300px;
+    width: 450px;
+    line-height: 80px;
+    white-space: nowrap;
     background-color: #D3573C;
     color: black;
     opacity: 0.8;
+}
+
+.details {
+    font-size: 26px;
+    font-weight: bold;
+    margin: auto 0;
+    padding: 10px;
+}
+
+.details:after {
+    display: table;
+    clear: both;
+}
+
+.dailyRate, .totalLikes {
+    float: left;
+    width: 50%;
+}
+
+.dailyRate {
+    text-align: right;
 }
 
 @media only screen and (max-width: 820px) {

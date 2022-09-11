@@ -42,31 +42,67 @@ async function getAllPicturesFromPhotographer(idPhotographer) {
 async function displayData(dataPhotographer){
     const photographerDescription = document.querySelector(".photograph-header");
     const photographerCreations = document.querySelector(".photographer-section");
+    const photographerDetails = document.querySelector(".photographer-details");
 
     const photographer = photographerHeaderFactory(dataPhotographer[0]);
     const userHeaderDOM = photographer.getUserHeaderDOM();
     photographerDescription.appendChild(userHeaderDOM);
 
     const realisations = dataPhotographer.slice(1, dataPhotographer.length);
-    //console.log(realisations);
+    console.log(realisations);
+    console.log(photographer);
+    let totalLikes = 0;
     
     realisations.forEach((realisation) => {
         const realisationModel = photographerContentFactory(realisation);
         const userContentDOM = realisationModel.getUserDescDOM();
         photographerCreations.appendChild(userContentDOM);
+        totalLikes += realisation.likes;
     })
+
+    dataPhotographer[0].totalLikes = totalLikes;
+    
+    const photographerIntelsBox = photographerDetailsFactory(dataPhotographer[0]);
+    const photographerDetailsDOM = photographerIntelsBox.getPhotographDetailsDOM();
+    photographerDetails.appendChild(photographerDetailsDOM);
+
+}
+
+function photographerDetailsFactory(data){
+    const { price, totalLikes } = data;
+    console.log(totalLikes);
+
+    function getPhotographDetailsDOM() {
+        const div = document.createElement( 'div' );
+        div.className = 'details';
+
+        const divTotalLikes = document.createElement( 'div' );
+        divTotalLikes.className = 'totalLikes';
+        divTotalLikes.innerHTML = totalLikes + '&nbsp;&#10084;'
+
+        const dailyRate = document.createElement( 'div' );
+        dailyRate.className = 'dailyRate';
+        dailyRate.innerHTML = price + '€ / jour';
+
+        div.appendChild(divTotalLikes);
+        div.appendChild(dailyRate);
+
+        return (div);
+    }
+
+    return { price, totalLikes, getPhotographDetailsDOM }
 }
 
 function photographerContentFactory(data) {
     const { title, likes, image, video, date, price } = data;
-    console.log(likes);
+    // console.log(likes);
 
     function getUserDescDOM() {
         const article = document.createElement( 'article' );
 
         const divRealisation = document.createElement( 'div' );
         divRealisation.className = 'realisation';
-        divRealisation.innerHTML = '<span class="title">' + title + '</span><span class="likes" onclick="addLike()">' + likes + '&nbsp;&#10084;</span>';
+        divRealisation.innerHTML = '<span class="title">' + title + '</span><span class="like' + likes + '" onclick="addLike(' + likes + ')">' + likes + '&nbsp;&#10084;</span>';
 
         if(typeof image !== 'undefined') {
             const pictureLink = `assets/photographers/${image}`;
@@ -151,6 +187,14 @@ function closeModal() {
     contactModal.style.display = "none";
     const body = document.body;
     body.style.backgroundColor="rgba(255, 255, 255, 1)";
+}
+
+function addLike(likes) {
+    console.log("Bonjour voici un like de plus à " + likes);
+    const divLike = document.querySelector('.like' + likes);
+    console.log(divLike);
+    divLike.style.color = 'red';
+    divLike.innerHTML = (likes + 1) + '&nbsp;&#10084;';
 }
 
 init();
