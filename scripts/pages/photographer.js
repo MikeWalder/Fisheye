@@ -32,7 +32,6 @@ async function getAllPicturesFromPhotographer(idPhotographer) {
                 albumData.push(data.media[i]);
             }
         }
-        // console.log(albumData);
         return albumData;
     })
     .catch(err => console.log(err));
@@ -49,8 +48,8 @@ async function displayData(dataPhotographer){
     photographerDescription.appendChild(userHeaderDOM);
 
     const realisations = dataPhotographer.slice(1, dataPhotographer.length);
-    console.log(realisations);
-    console.log(photographer);
+    // console.log(realisations);
+    // console.log(photographer);
     let totalLikes = 0;
     
     realisations.forEach((realisation) => {
@@ -70,7 +69,7 @@ async function displayData(dataPhotographer){
 
 function photographerDetailsFactory(data){
     const { price, totalLikes } = data;
-    console.log(totalLikes);
+    // console.log(totalLikes);
 
     function getPhotographDetailsDOM() {
         const div = document.createElement( 'div' );
@@ -190,9 +189,7 @@ function closeModal() {
 }
 
 function addLike(likes) {
-    console.log("Bonjour voici un like de plus à " + likes);
     const divLike = document.querySelector('.like' + likes);
-    console.log(divLike);
     divLike.style.color = 'red';
     divLike.innerHTML = (likes + 1) + '&nbsp;&#10084;';
 }
