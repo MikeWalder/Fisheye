@@ -41,14 +41,14 @@ header {
     display: flex;
 }
 
+.photographer-section {
+    margin-top: 50px;
+}
+
 .photographer-section article {
     justify-self: center; 
     display: flex;
     flex-direction: column;
-}
-
-.photographer-section {
-    margin-top: 50px;
 }
 
 .photographer_section article h2, .photographer_section article h4, 
@@ -85,6 +85,7 @@ header {
 .photographer-section article img, .photographer-section article video {
     height: 500px;
     width: 500px;
+    margin: 0 auto;
 }
 
 .photographer_section article img:hover {
@@ -144,6 +145,7 @@ header {
 .photograph-header div article h3 {
     color: black;
     font-size: 22px;
+    margin: 0px;
 }
 
 .photograph-header div img {
@@ -168,17 +170,13 @@ header {
     font-weight: lighter;
 }
 
-#order-select * {
-    border-bottom: 1px solid white;
-}
-
 .photographer-details {
     position: fixed;
-    bottom: 0px;
+    bottom: 1vh;
     right: 1vw; 
     height: 80px;
     width: 450px;
-    line-height: 80px;
+    line-height: 70px;
     white-space: nowrap;
     background-color: #D3573C;
     color: black;
@@ -218,8 +216,16 @@ header {
         width: 250px;
     }
 
-    .photographer_section article .presenter {
-        font-size: 14px;
+    .photographer_section article h2 {
+        font-size: 22px;
+    }
+
+    .photographer_section article h5, .photographer_section article h6 {
+        display: none;
+    }
+
+    .photograph-header div article h1 {
+        font-size: 32px;
     }
 }
 
@@ -239,7 +245,16 @@ header {
     }
 
     .photograph-header div article h1 {
-        font-size: 54px;
+        font-size: 46px;
+    }
+
+    .photograph-header div article h3 {
+        font-size: 16px;
+    }
+
+    .photograph-header div button {
+        font-size: 16px;
+        padding: 5px;
     }
 
     .photograph-header div img {
@@ -253,7 +268,7 @@ header {
         gap: 20px;
     }
 
-    .photographer-section article img {
+    .photographer-section article img, .photographer-section article video {
         height: 400px;
         width: 400px;
     }

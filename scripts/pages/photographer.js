@@ -40,6 +40,7 @@ async function getAllPicturesFromPhotographer(idPhotographer) {
 
 async function displayData(dataPhotographer){
     const photographerDescription = document.querySelector(".photograph-header");
+    const contentOrderSelect = document.querySelector("#order-select");
     const photographerCreations = document.querySelector(".photographer-section");
     const photographerDetails = document.querySelector(".photographer-details");
 
@@ -48,6 +49,9 @@ async function displayData(dataPhotographer){
     photographerDescription.appendChild(userHeaderDOM);
 
     const realisations = dataPhotographer.slice(1, dataPhotographer.length);
+
+    contentOrderSelect.setAttribute("onchange", "orderSelect()");
+    
     // console.log(realisations);
     // console.log(photographer);
     let totalLikes = 0;
@@ -67,7 +71,7 @@ async function displayData(dataPhotographer){
 
 }
 
-function photographerDetailsFactory(data){
+function photographerDetailsFactory(data){ //Traitement des données pour l'encart en bas à droite
     const { price, totalLikes } = data;
     // console.log(totalLikes);
 
@@ -174,24 +178,30 @@ async function init() {
     displayData(creationsPhotographer);
 }
 
-function displayModal() {
+function displayModal() { //Affichage du modal
     const contactModal = document.getElementById( 'contact_modal' );
     contactModal.style.display = "block";
     const body = document.body;
     body.style.backgroundColor="rgba(0, 0, 0, 0.4)";
 }
 
-function closeModal() {
+function closeModal() { //Fermeture du modal
     const contactModal = document.getElementById( 'contact_modal' );
     contactModal.style.display = "none";
     const body = document.body;
     body.style.backgroundColor="rgba(255, 255, 255, 1)";
 }
 
-function addLike(likes) {
+function addLike(likes) { //Ajout d'un favori sur une oeuvre
     const divLike = document.querySelector('.like' + likes);
     divLike.style.color = 'red';
     divLike.innerHTML = (likes + 1) + '&nbsp;&#10084;';
+}
+
+function orderSelect(){
+    let selector = document.querySelector("#order-select").value;
+    console.log(selector);
+    // Ajouter la partie tri en fonction de la valeur de selector
 }
 
 init();
