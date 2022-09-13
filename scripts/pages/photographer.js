@@ -51,8 +51,33 @@ async function displayData(dataPhotographer){
     const realisations = dataPhotographer.slice(1, dataPhotographer.length);
 
     contentOrderSelect.setAttribute("onchange", "orderSelect()");
+
+    let langages = [
+        { name: 'JavaScript', value: 3, date: "2019-04-31" },
+        { name: 'HTML', value: 1, date: "2018-08-31" },
+        { name: 'Python', value: 7, date: "2019-04-11" },
+        { name: 'PHP', value: 5, date: "2021-04-12" },
+        { name: 'CSS', value: 2, date: "2019-05-31" }
+    ];
     
-    // console.log(realisations);
+    console.log(langages);
+
+    langages.sort((a, b) => a.value - b.value); // Tri par ordre croissant avec la fonction fléchée
+
+    console.log(langages);
+
+    console.log(realisations);
+
+    realisations.sort(function(x, y) {
+        let firstDate = new Date(x.date),
+        secondDate = new Date(y.date);
+
+        if(firstDate < secondDate) return -1;
+        if(firstDate > secondDate) return 1;
+        return 0;
+    });
+    console.log(realisations);
+
     // console.log(photographer);
     let totalLikes = 0;
     
@@ -98,7 +123,6 @@ function photographerDetailsFactory(data){ //Traitement des données pour l'enca
 
 function photographerContentFactory(data) {
     const { title, likes, image, video, date, price } = data;
-    // console.log(likes);
 
     function getUserDescDOM() {
         const article = document.createElement( 'article' );
