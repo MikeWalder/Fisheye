@@ -40,45 +40,48 @@ async function getAllPicturesFromPhotographer(idPhotographer) {
 
 async function displayData(dataPhotographer){
     const photographerDescription = document.querySelector(".photograph-header");
+    photographerDescription.innerHTML = '';
     const contentOrderSelect = document.querySelector("#order-select");
     const photographerCreations = document.querySelector(".photographer-section");
+    photographerCreations.innerHTML = '';
     const photographerDetails = document.querySelector(".photographer-details");
 
     const photographer = photographerHeaderFactory(dataPhotographer[0]);
-    const userHeaderDOM = photographer.getUserHeaderDOM();
+    let userHeaderDOM = null;
+    userHeaderDOM = photographer.getUserHeaderDOM();
     photographerDescription.appendChild(userHeaderDOM);
-
-    const realisations = dataPhotographer.slice(1, dataPhotographer.length);
 
     contentOrderSelect.setAttribute("onchange", "orderSelect()");
 
-    let langages = [
-        { name: 'JavaScript', value: 3, date: "2019-04-31" },
-        { name: 'HTML', value: 1, date: "2018-08-31" },
-        { name: 'Python', value: 7, date: "2019-04-11" },
-        { name: 'PHP', value: 5, date: "2021-04-12" },
-        { name: 'CSS', value: 2, date: "2019-05-31" }
-    ];
+    // PARTIE TRI DU TABLEAU D'OBJETS JSON A PARTIR DU SELECT
+
+    // => realisations : ensemble des créations du photographe sélectionné
+    // Ce tableau d'objets devra être traité en fonction du type de tri entré via onchange()
+    const realisations = dataPhotographer.slice(1, dataPhotographer.length);
+    console.log(realisations);
+
+    const orderSelectValue = document.querySelector("#order-select").value;
+    console.log(orderSelectValue);
+    console.log(realisations[0][orderSelectValue]);
+
+    if(orderSelectValue){
+        console.log("your value is " + orderSelectValue + "!");
+
+        realisations.sort(function(a, b) {
+            if(a[orderSelectValue] < b[orderSelectValue]) return -1;
+            if(a[orderSelectValue] > b[orderSelectValue]) return 1;
+            return 0;
+        });
+        console.log(realisations);
+    }
     
-    console.log(langages);
+    // langages.sort((a, b) => a.value - b.value); 
 
-    langages.sort((a, b) => a.value - b.value); // Tri par ordre croissant avec la fonction fléchée
-
-    console.log(langages);
-
-    console.log(realisations);
-
-    realisations.sort(function(x, y) {
-        let firstDate = new Date(x.date),
-        secondDate = new Date(y.date);
-
-        if(firstDate < secondDate) return -1;
-        if(firstDate > secondDate) return 1;
-        return 0;
-    });
-    console.log(realisations);
+    
 
     // console.log(photographer);
+
+    // total des likes des créations pour le photographe sélectionné
     let totalLikes = 0;
     
     realisations.forEach((realisation) => {
@@ -160,7 +163,8 @@ function photographerHeaderFactory(data) {
     const picture = `assets/photographers/${portrait}`;
 
     function getUserHeaderDOM() {
-        document.getElementById( 'modal_photograph' ).innerText = name;
+        document.getElementById( 'modal_photograph' ).innerText = '';
+        document.getElementById( 'modal_photograph' ).innerText += name;
 
         const div = document.createElement( 'div' );
         const article = document.createElement( 'article' );
@@ -202,6 +206,10 @@ async function init() {
     displayData(creationsPhotographer);
 }
 
+function recupDataContent(data) {
+    return data;
+}
+
 function displayModal() { //Affichage du modal
     const contactModal = document.getElementById( 'contact_modal' );
     contactModal.style.display = "block";
@@ -223,9 +231,7 @@ function addLike(likes) { //Ajout d'un favori sur une oeuvre
 }
 
 function orderSelect(){
-    let selector = document.querySelector("#order-select").value;
-    console.log(selector);
-    // Ajouter la partie tri en fonction de la valeur de selector
+    init();
 }
 
 init();
