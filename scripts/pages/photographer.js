@@ -53,46 +53,38 @@ async function displayData(dataPhotographer){
 
     contentOrderSelect.setAttribute("onchange", "orderSelect()");
 
-    // PARTIE TRI DU TABLEAU D'OBJETS JSON A PARTIR DU SELECT
-
-    // => realisations : ensemble des créations du photographe sélectionné
-    // Ce tableau d'objets devra être traité en fonction du type de tri entré via onchange()
+    // Récupération des oeuvres du photographe sélectionné
     const realisations = dataPhotographer.slice(1, dataPhotographer.length);
-    console.log(realisations);
 
+    // Récupération de la valeur du select
     const orderSelectValue = document.querySelector("#order-select").value;
-    console.log(orderSelectValue);
-    console.log(realisations[0][orderSelectValue]);
+    // console.log(orderSelectValue);
+    // console.log(realisations[0][orderSelectValue]);
 
     if(orderSelectValue){
-        console.log("your value is " + orderSelectValue + "!");
+        // console.log("your value is " + orderSelectValue + "!");
 
         realisations.sort(function(a, b) {
             if(a[orderSelectValue] < b[orderSelectValue]) return -1;
             if(a[orderSelectValue] > b[orderSelectValue]) return 1;
             return 0;
         });
-        console.log(realisations);
+        // console.log(realisations);
     }
-    
-    // langages.sort((a, b) => a.value - b.value); 
 
-    
-
-    // console.log(photographer);
-
-    // total des likes des créations pour le photographe sélectionné
+    // Initialisation du total des likes des créations du photographe sélectionné
     let totalLikes = 0;
     
+    // Partie insertion data et DOM des créations du photographe sélectionné
     realisations.forEach((realisation) => {
         const realisationModel = photographerContentFactory(realisation);
         const userContentDOM = realisationModel.getUserDescDOM();
         photographerCreations.appendChild(userContentDOM);
         totalLikes += realisation.likes;
     })
-
     dataPhotographer[0].totalLikes = totalLikes;
     
+    // Partie insertion data et DOM dans l'encart en bas à droit de la page du photographe
     const photographerIntelsBox = photographerDetailsFactory(dataPhotographer[0]);
     const photographerDetailsDOM = photographerIntelsBox.getPhotographDetailsDOM();
     photographerDetails.appendChild(photographerDetailsDOM);
@@ -127,7 +119,7 @@ function photographerDetailsFactory(data){ //Traitement des données pour l'enca
 function photographerContentFactory(data) {
     const { title, likes, image, video, date, price } = data;
 
-    function getUserDescDOM() {
+    function getUserDescDOM() { // Gestion DOM des créations du photographe
         const article = document.createElement( 'article' );
 
         const divRealisation = document.createElement( 'div' );
@@ -162,7 +154,7 @@ function photographerHeaderFactory(data) {
 
     const picture = `assets/photographers/${portrait}`;
 
-    function getUserHeaderDOM() {
+    function getUserHeaderDOM() { // Gestion DOM du header des informations du photographe
         document.getElementById( 'modal_photograph' ).innerText = '';
         document.getElementById( 'modal_photograph' ).innerText += name;
 
@@ -206,31 +198,27 @@ async function init() {
     displayData(creationsPhotographer);
 }
 
-function recupDataContent(data) {
-    return data;
-}
-
-function displayModal() { //Affichage du modal
+function displayModal() { // Affichage du modal
     const contactModal = document.getElementById( 'contact_modal' );
     contactModal.style.display = "block";
     const body = document.body;
     body.style.backgroundColor="rgba(0, 0, 0, 0.4)";
 }
 
-function closeModal() { //Fermeture du modal
+function closeModal() { // Fermeture du modal
     const contactModal = document.getElementById( 'contact_modal' );
     contactModal.style.display = "none";
     const body = document.body;
     body.style.backgroundColor="rgba(255, 255, 255, 1)";
 }
 
-function addLike(likes) { //Ajout d'un favori sur une oeuvre
+function addLike(likes) { // Ajout d'un favori sur une oeuvre
     const divLike = document.querySelector('.like' + likes);
     divLike.style.color = 'red';
     divLike.innerHTML = (likes + 1) + '&nbsp;&#10084;';
 }
 
-function orderSelect(){
+function orderSelect(){ // Fonction liée au onchange de l'élément HTML <select> (tri)
     init();
 }
 
