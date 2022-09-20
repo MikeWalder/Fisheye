@@ -5,7 +5,6 @@ body {
     margin: 0;
 }
 
-
 header {
     display: flex;
     flex-direction: row;
@@ -86,6 +85,12 @@ header {
     height: 500px;
     width: 500px;
     margin: 0 auto;
+    transition: all 0.2s;
+}
+
+.photographer-section article img:hover, .photographer-section article video:hover {
+    transform: scale(0.95);
+    filter: drop-shadow(4px 4px 8px gray);
 }
 
 .photographer_section article img:hover {
@@ -94,23 +99,9 @@ header {
     transform: scale(1.05); 
 }
 
-.realisation {
-    display: flex;
-    justify-content: space-between;
-    color: #901C1C;
-    font-size: 28px;
-}
 
-.realisation .title {
-    max-width: 420px;
-}
 
-.realisation .likes:hover {
-    cursor: pointer;
-    transition: all 0.4s;
-    color: red;
-}
-
+/* Partie header informations du photographe */
 .photograph-header div {
     padding-left: 100px;
     padding-right: 100px;
@@ -154,6 +145,26 @@ header {
     border-radius: 50%;
 }
 
+.realisation {
+    display: flex;
+    justify-content: space-between;
+    color: #901C1C;
+    font-size: 28px;
+}
+
+.realisation .title {
+    max-width: 420px;
+}
+
+.realisation .likes:hover {
+    cursor: pointer;
+    transition: all 0.4s;
+    color: red;
+}
+
+
+
+/* Partie Select (tri) */
 .photograph-tri {
     padding-left: 100px;
     padding-right: 100px;
@@ -170,6 +181,9 @@ header {
     font-weight: lighter;
 }
 
+
+
+/* Partie encart  */
 .photographer-details {
     position: fixed;
     bottom: 1vh;

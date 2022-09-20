@@ -95,7 +95,7 @@ function photographerDetailsFactory(data){ //Traitement des données pour l'enca
     const { price, totalLikes } = data;
     // console.log(totalLikes);
 
-    function getPhotographDetailsDOM() {
+    function getPhotographDetailsDOM() { // Gestion DOM de l'encart
         const div = document.createElement( 'div' );
         div.className = 'details';
 
@@ -127,7 +127,7 @@ function photographerContentFactory(data) {
         divRealisation.innerHTML = '<span class="title">' + title + '</span><span class="like' + likes + '" onclick="addLike(' + likes + ')">' + likes + '&nbsp;&#10084;</span>';
 
         if(typeof image !== 'undefined') {
-            const pictureLink = `assets/photographers/${image}`;
+            const pictureLink = `assets/creations/images/${image}`;
             const img = document.createElement( 'img' );
             img.setAttribute("src", pictureLink)
             img.setAttribute("alt", title)
@@ -135,7 +135,7 @@ function photographerContentFactory(data) {
         }
 
         if(typeof video !== 'undefined') {
-            const videoLink = `assets/photographers/videos/${video}`;
+            const videoLink = `assets/creations/videos/${video}`;
             const vid = document.createElement( 'video' );
             vid.setAttribute("src", videoLink);
             vid.setAttribute("controls", "controls");
@@ -176,7 +176,7 @@ function photographerHeaderFactory(data) {
 
         const buttonContact = document.createElement( 'button' );
         buttonContact.classList.add("contact_button");
-        buttonContact.setAttribute("onclick", "displayModal()");
+        buttonContact.setAttribute("onclick", "setTimeout(() => {displayModal()}, 400)");
         buttonContact.textContent = 'Contactez moi';
 
         const img = document.createElement( 'img' );
@@ -201,13 +201,15 @@ async function init() {
 function displayModal() { // Affichage du modal
     const contactModal = document.getElementById( 'contact_modal' );
     contactModal.style.display = "block";
+    contactModal.style.opacity = "0.9";
     const body = document.body;
     body.style.backgroundColor="rgba(0, 0, 0, 0.4)";
 }
 
 function closeModal() { // Fermeture du modal
     const contactModal = document.getElementById( 'contact_modal' );
-    contactModal.style.display = "none";
+    contactModal.style.opacity = "0";
+    setTimeout(() => {contactModal.style.display = "none";}, 400);
     const body = document.body;
     body.style.backgroundColor="rgba(255, 255, 255, 1)";
 }

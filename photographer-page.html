@@ -12,30 +12,31 @@
   <body>
 
     <header>
-        <a href="index.html" title="Fisheye Home page"><img src="assets/images/logo.png" alt="Fisheye logo" class="logo" /></a>
+        <a href="index.html" title="Fisheye Home page"><img src="assets/main/logo.png" alt="Fisheye logo" class="logo" /></a>
     </header>
 
     <main id="main">
-        <div class="photograph-header">
-
-        </div>
+        <div class="photograph-header"></div>
 
         <div class="photograph-tri">
+
           <label for="order-select">Trier par &nbsp;</label>
+
           <select id="order-select">
             <option value=""> - </option>
             <option value="likes">Popularité</option><hr>
             <option value="date">Date</option><hr>
             <option value="title">Titre</option>
           </select>
+
         </div>
 
-        <div class="photographer-section">
-          
-        </div>
+        <div class="photographer-section"></div>
 
         <div id="contact_modal">
-          <h1 class="modal_title">Contactez-moi</h1><span class="close" onclick="closeModal()">&times;</span>
+
+          <span class="close" title="Fermer" onclick="closeModal()">&times;</span>
+          <h1 id="modal_title">Contactez-moi</h1>
           <h2 id="modal_photograph"></h2>
 
           <form>
@@ -49,6 +50,7 @@
             <input type="text" class="textMessage"></textarea>
             <button type="submit" class="contact_button">Envoyer</button>
           </form>
+          
         </div>
 
         <div class="photographer-details"></div>
