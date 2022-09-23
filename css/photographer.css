@@ -70,18 +70,11 @@ header {
     margin-left: 100px;
 }
 
-/* .photographer_description {
-    padding-left: 100px;
-    padding-right: 100px;
-    max-height: 280px;
-    background-color: #FAFAFA;
-} */
-
 .contact_button {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     color: white;
-    padding: 11px;
+    padding: 12px;
     width: 170px;
     height: 70px;
     border: none;

@@ -42,7 +42,7 @@ async function displayData(dataPhotographer){
     const photographerDescription = document.querySelector(".photograph-header");
     photographerDescription.innerHTML = '';
     const contentOrderSelect = document.querySelector("#order-select");
-    const photographerCreations = document.querySelector(".photographer-section");
+    const photographerCreations = document.querySelector(".creations-section");
     photographerCreations.innerHTML = '';
     const photographerDetails = document.querySelector(".photographer-details");
 
@@ -122,6 +122,9 @@ function photographerContentFactory(data) {
     function getUserDescDOM() { // Gestion DOM des créations du photographe
         const article = document.createElement( 'article' );
 
+        const divContainCreation = document.createElement( 'div' );
+        divContainCreation.className = 'containCreation';
+
         const divRealisation = document.createElement( 'div' );
         divRealisation.className = 'realisation';
         divRealisation.innerHTML = '<span class="title">' + title + '</span><span class="like' + likes + '" onclick="addLike(' + likes + ')">' + likes + '&nbsp;&#10084;</span>';
@@ -131,7 +134,7 @@ function photographerContentFactory(data) {
             const img = document.createElement( 'img' );
             img.setAttribute("src", pictureLink)
             img.setAttribute("alt", title)
-            article.appendChild(img);
+            divContainCreation.appendChild(img);
         }
 
         if(typeof video !== 'undefined') {
@@ -139,9 +142,10 @@ function photographerContentFactory(data) {
             const vid = document.createElement( 'video' );
             vid.setAttribute("src", videoLink);
             vid.setAttribute("controls", "controls");
-            article.appendChild(vid);
+            divContainCreation.appendChild(vid);
         }
-        
+
+        article.appendChild(divContainCreation);
         article.appendChild(divRealisation);
 
         return (article);

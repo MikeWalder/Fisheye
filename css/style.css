@@ -1,18 +1,5 @@
 @import url("photographer.css");
 
-body {
-    font-family: "DM Sans", sans-serif;
-    margin: 0;
-}
-
-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 90px;
-}
-
 .photograph {
     color: #901C1C;
     margin-right: 100px;
@@ -23,7 +10,7 @@ header {
     margin-left: 100px;
 }
 
-.photographer_section, .photographer-section {
+.photographer_section, .creations-section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 40px;
@@ -38,16 +25,6 @@ header {
     color: #D3573C;
     font-size: 30px;
     display: flex;
-}
-
-.photographer-section {
-    margin-top: 50px;
-}
-
-.photographer-section article {
-    justify-self: center; 
-    display: flex;
-    flex-direction: column;
 }
 
 .photographer_section article h2, .photographer_section article h4, 
@@ -81,22 +58,38 @@ header {
     transition: transform .2s;
 }
 
-.photographer-section article img, .photographer-section article video {
+.photographer_section article img:hover {
+    -ms-transform: scale(1.05); /* IE 9 */
+    -webkit-transform: scale(1.05); /* Safari 3-8 */
+    transform: scale(1.05); 
+}
+
+.creations-section {
+    margin-top: 50px;
+}
+
+.creations-section article {
+    justify-self: center; 
+    display: flex;
+    flex-direction: column;
+}
+
+.creations-section article .containCreation {
+    max-height: 500px;
+    overflow: hidden;
+}
+
+.creations-section article img, .creations-section article video {
     height: 500px;
+    max-height: 500px;
     width: 500px;
     margin: 0 auto;
     transition: all 0.2s;
 }
 
-.photographer-section article img:hover, .photographer-section article video:hover {
-    transform: scale(0.95);
-    filter: drop-shadow(4px 4px 8px gray);
-}
-
-.photographer_section article img:hover {
-    -ms-transform: scale(1.05); /* IE 9 */
-    -webkit-transform: scale(1.05); /* Safari 3-8 */
-    transform: scale(1.05); 
+.creations-section article img:hover, .creations-section article video:hover {
+    transform: scale(1.05);
+    filter: contrast(120%);
 }
 
 
@@ -277,18 +270,19 @@ header {
         border-radius: 50%;
     }
 
-    .photographer-section {
+    .creations-section {
         grid-template-columns: 1fr 1fr;
         gap: 20px;
     }
 
-    .photographer-section article img, .photographer-section article video {
+    .creations-section article img, .creations-section article video {
         height: 400px;
         width: 400px;
+
     }
 
-    .photographer-section article h1 {
+    .creations-section article h1 {
         font-size: 16px;
-        margin-right: 0px !important;
+        margin-right: 0px;
     }
 }
