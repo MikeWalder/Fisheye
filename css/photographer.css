@@ -71,22 +71,27 @@ header {
 }
 
 .contact_button {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
     color: white;
     padding: 12px;
-    width: 170px;
-    height: 70px;
+    width: 180px;
+    height: 80px;
     border: none;
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
     margin: 20px 0px;
+    transition: all 0.4s;
+}
+
+.contact_button:hover {
+    background-color: #D3573C;
 }
 
 
 
-/* Partie forlulaire de contact du modal */
+/* Partie formulaire de contact du modal */
 form {
     display: flex;
     margin-top: 30px;
