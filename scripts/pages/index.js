@@ -4,16 +4,13 @@
             return response.json();
         })
         .then((data) => {
-            // console.log(data);
             return data;
         })
         .catch(err => console.log(err));
     }
 
     async function getPhotographers() {
-        // Penser à remplacer par les données récupérées dans le json
         const photographers = requestAllPhotographers();
-        console.log(photographers);
     }
 
     async function displayData(photographers) {

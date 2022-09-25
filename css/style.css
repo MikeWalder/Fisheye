@@ -77,6 +77,7 @@
 .creations-section article .containCreation {
     max-height: 500px;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .creations-section article img, .creations-section article video {
@@ -89,7 +90,7 @@
 
 .creations-section article img:hover, .creations-section article video:hover {
     transform: scale(1.05);
-    filter: contrast(120%);
+    filter: contrast(80%);
 }
 
 
@@ -188,6 +189,11 @@
     background-color: #D3573C;
     color: black;
     opacity: 0.8;
+    transition: all 0.4s;
+}
+
+.photographer-details:hover {
+    color: white;
 }
 
 .details {
