@@ -75,14 +75,13 @@
 }
 
 .creations-section article .containCreation {
-    max-height: 500px;
     overflow: hidden;
     cursor: pointer;
 }
 
 .creations-section article img, .creations-section article video {
-    height: 500px;
-    max-height: 500px;
+    height: 350px;
+    max-height: 350px;
     width: 500px;
     margin: 0 auto;
     transition: all 0.2s;
@@ -282,9 +281,8 @@
     }
 
     .creations-section article img, .creations-section article video {
-        height: 400px;
-        width: 400px;
-
+        height: 300px;
+        width: 350px;
     }
 
     .creations-section article h1 {
