@@ -127,7 +127,7 @@ function photographerContentFactory(data) {
 
         const divRealisation = document.createElement( 'div' );
         divRealisation.className = 'realisation';
-        divRealisation.innerHTML = '<span class="title">' + title + '</span><span class="like' + likes + '" onclick="addLike(' + likes + ')">' + likes + '&nbsp;&#10084;</span>';
+        divRealisation.innerHTML = '<span class="title">' + title + '</span><span class="like' + likes + '" onclick="addCreationLike(' + likes + ')">' + likes + '&nbsp;&#10084;</span>';
 
         if(typeof image !== 'undefined') {
             const pictureLink = `assets/creations/images/${image}`;
@@ -218,7 +218,7 @@ function closeModal() { // Fermeture du modal
     body.style.backgroundColor="rgba(255, 255, 255, 1)";
 }
 
-function addLike(likes) { // Ajout d'un favori sur une oeuvre
+function addCreationLike(likes) { // Ajout d'un favori sur une oeuvre
     const divLike = document.querySelector('.like' + likes);
     divLike.style.color = 'red';
     divLike.innerHTML = (likes + 1) + '&nbsp;&#10084;';
