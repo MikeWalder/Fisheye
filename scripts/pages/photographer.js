@@ -1,5 +1,6 @@
 //Mettre le code JavaScript lié à la page photographer.html
 
+
 // Récupère l'id du photographe passé en paramètre d'URL
 function getIdParameter() {
     let searchParams = new URLSearchParams(window.location.search);
@@ -10,6 +11,7 @@ function getIdParameter() {
         window.location.pathname = 'index.html';
     }
 }
+
 
 // Récupérer toute les créations liées à chaque photographe
 async function getAllPicturesFromPhotographer(idPhotographer) {
@@ -69,29 +71,35 @@ async function displayData(dataPhotographer){
             if(a[orderSelectValue] > b[orderSelectValue]) return 1;
             return 0;
         });
-        // console.log(realisations);
     }
-
-    // Initialisation du total des likes des créations du photographe sélectionné
-    let totalLikes = 0;
     
     // Partie insertion data et DOM des créations du photographe sélectionné
     realisations.forEach((realisation) => {
         const realisationModel = photographerContentFactory(realisation);
         const userContentDOM = realisationModel.getUserDescDOM();
         photographerCreations.appendChild(userContentDOM);
-        totalLikes += realisation.likes;
     })
-    dataPhotographer[0].totalLikes = totalLikes;
+
+    dataPhotographer[0].totalLikes = countTotalLikes(realisations);
     
     // Partie insertion data et DOM dans l'encart en bas à droit de la page du photographe
     const photographerIntelsBox = photographerDetailsFactory(dataPhotographer[0]);
     const photographerDetailsDOM = photographerIntelsBox.getPhotographDetailsDOM();
     photographerDetails.appendChild(photographerDetailsDOM);
-
 }
 
-function photographerDetailsFactory(data){ //Traitement des données pour l'encart en bas à droite
+
+// Gestion du total des likes des créations du photographe sélectionné
+function countTotalLikes(datas) {
+    let totalLikes = 0;
+    datas.forEach((data) => {
+        totalLikes += data.likes;
+    })
+    return totalLikes;
+}
+
+
+function photographerDetailsFactory(data){ // Traitement des données pour l'encart en bas à droite
     const { price, totalLikes } = data;
     // console.log(totalLikes);
 
@@ -116,8 +124,9 @@ function photographerDetailsFactory(data){ //Traitement des données pour l'enca
     return { price, totalLikes, getPhotographDetailsDOM }
 }
 
-function photographerContentFactory(data) {
-    const { title, likes, image, video, date, price } = data;
+
+function photographerContentFactory(data) { // Traitement des données des créations pour chaque photographe
+    const { id, title, likes, image, video, date, price } = data;
 
     function getUserDescDOM() { // Gestion DOM des créations du photographe
         const article = document.createElement( 'article' );
@@ -127,7 +136,7 @@ function photographerContentFactory(data) {
 
         const divRealisation = document.createElement( 'div' );
         divRealisation.className = 'realisation';
-        divRealisation.innerHTML = '<span class="title">' + title + '</span><span class="like' + likes + '" onclick="addCreationLike(' + likes + ')">' + likes + '&nbsp;&#10084;</span>';
+        divRealisation.innerHTML = '<span class="title">' + title + '</span><span class="likeCreation' + likes + '" onclick=addCreationLike('+`${likes}`+','+`${id}`+')>' + likes + '&nbsp;&#10084;</span>';
 
         if(typeof image !== 'undefined') {
             const pictureLink = `assets/creations/images/${image}`;
@@ -152,6 +161,7 @@ function photographerContentFactory(data) {
     }
     return {  title, likes, image, video, date, price, getUserDescDOM }
 }
+
 
 function photographerHeaderFactory(data) {
     const { name, city, country, portrait, tagline, price } = data;
@@ -196,13 +206,15 @@ function photographerHeaderFactory(data) {
     return { name, city, country, portrait, tagline, price, getUserHeaderDOM }
 }
 
+
 async function init() {
     let findId = getIdParameter();
     const creationsPhotographer = await getAllPicturesFromPhotographer(findId);
     displayData(creationsPhotographer);
 }
 
-function displayModal() { // Affichage du modal
+
+function displayModal() { // Affichage du modal avec effets CSS
     const contactModal = document.getElementById( 'contact_modal' );
     contactModal.style.display = "block";
     contactModal.style.opacity = "0.9";
@@ -210,7 +222,8 @@ function displayModal() { // Affichage du modal
     body.style.backgroundColor="rgba(0, 0, 0, 0.4)";
 }
 
-function closeModal() { // Fermeture du modal
+
+function closeModal() { // Fermeture du modal avec effet CSS
     const contactModal = document.getElementById( 'contact_modal' );
     contactModal.style.opacity = "0";
     setTimeout(() => {contactModal.style.display = "none";}, 400);
@@ -218,14 +231,23 @@ function closeModal() { // Fermeture du modal
     body.style.backgroundColor="rgba(255, 255, 255, 1)";
 }
 
-function addCreationLike(likes) { // Ajout d'un favori sur une oeuvre
-    const divLike = document.querySelector('.like' + likes);
-    divLike.style.color = 'red';
-    divLike.innerHTML = (likes + 1) + '&nbsp;&#10084;';
+
+async function addCreationLike(likes, idCreation) { // Ajout d'un favori sur une oeuvre
+    const divLikeCreation = document.querySelector('.likeCreation' + likes);
+    console.log(likes);
+    console.log(idCreation);
+    divLikeCreation.style.color = 'red';
+    divLikeCreation.innerHTML = (likes + 1) + '&nbsp;&#10084;';
+
+    let findId = getIdParameter();
+    const creationsPhotographer = await getAllPicturesFromPhotographer(findId);
+    console.log(creationsPhotographer);
 }
+
 
 function orderSelect(){ // Fonction liée au onchange de l'élément HTML <select> (tri)
     init();
 }
+
 
 init();
