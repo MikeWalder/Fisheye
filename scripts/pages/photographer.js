@@ -26,9 +26,6 @@ async function getAllPicturesFromPhotographer(idPhotographer) {
                 albumData[0] = data.photographers[i];
             }
         }
-
-
-
         for(let i = 0; i < data.media.length; i++){
             if(data.media[i].photographerId == idPhotographer){
                 albumData.push(data.media[i]);
@@ -133,6 +130,7 @@ function photographerContentFactory(data) { // Traitement des données des créa
 
         const divContainCreation = document.createElement( 'div' );
         divContainCreation.className = 'containCreation';
+        divContainCreation.setAttribute("onclick", "displayLightbox("+id+");");
 
         const divRealisation = document.createElement( 'div' );
         divRealisation.className = 'realisation';
@@ -217,7 +215,7 @@ async function init() {
 function displayModal() { // Affichage du modal avec effets CSS
     const contactModal = document.getElementById( 'contact_modal' );
     contactModal.style.display = "block";
-    contactModal.style.opacity = "0.9";
+    contactModal.style.opacity = "0.99";
     const body = document.body;
     body.style.backgroundColor="rgba(0, 0, 0, 0.4)";
 }
@@ -249,5 +247,18 @@ function orderSelect(){ // Fonction liée au onchange de l'élément HTML <selec
     init();
 }
 
+
+function displayLightbox(id) {
+    console.log(id);
+    
+    const divLightbox = document.querySelector(' .lightbox ');
+    divLightbox.style.display = "block";
+}
+
+
+function closeLightbox() {
+    const divLightbox = document.querySelector(' .lightbox ');
+    divLightbox.style.display = "none";
+}
 
 init();
