@@ -181,13 +181,18 @@ form textarea {
 .lightbox-container {
     border: 1px solid white;
     position: fixed;
-    top: 5%;
-    left: 5%;
-    height: 90%;
-    width: 90%;
+    top: 10%;
+    left: 10%;
+    height: 80%;
+    width: 80%;
+    margin: 0 auto;
     background-color: lightgrey;
 }
 
+.lightbox-container img {
+    width: 100%;
+    height: 100%;
+}
 
 
 /* Responsive */

@@ -1,6 +1,3 @@
-//Mettre le code JavaScript lié à la page photographer.html
-
-
 // Récupère l'id du photographe passé en paramètre d'URL
 function getIdParameter() {
     let searchParams = new URLSearchParams(window.location.search);
@@ -57,12 +54,8 @@ async function displayData(dataPhotographer){
 
     // Récupération de la valeur du select
     const orderSelectValue = document.querySelector("#order-select").value;
-    // console.log(orderSelectValue);
-    // console.log(realisations[0][orderSelectValue]);
 
     if(orderSelectValue){
-        // console.log("your value is " + orderSelectValue + "!");
-
         realisations.sort(function(a, b) {
             if(a[orderSelectValue] < b[orderSelectValue]) return -1;
             if(a[orderSelectValue] > b[orderSelectValue]) return 1;
@@ -76,7 +69,6 @@ async function displayData(dataPhotographer){
         const userContentDOM = realisationModel.getUserDescDOM();
         photographerCreations.appendChild(userContentDOM);
     })
-
     dataPhotographer[0].totalLikes = countTotalLikes(realisations);
     
     // Partie insertion data et DOM dans l'encart en bas à droit de la page du photographe
@@ -117,7 +109,6 @@ function photographerDetailsFactory(data){ // Traitement des données pour l'enc
 
         return (div);
     }
-
     return { price, totalLikes, getPhotographDetailsDOM }
 }
 
@@ -130,7 +121,16 @@ function photographerContentFactory(data) { // Traitement des données des créa
 
         const divContainCreation = document.createElement( 'div' );
         divContainCreation.className = 'containCreation';
-        divContainCreation.setAttribute("onclick", "displayLightbox("+id+");");
+        
+        // Partie gestion de l'affichage de la lightbox
+        divContainCreation.addEventListener('click', function() {
+            const divLightbox = document.querySelector(' .lightbox ');
+            divLightbox.style.display = "block";
+            let lightboxContainerImg = document.querySelector( '.lightbox-container img' );
+            const pictureLink = `assets/creations/images/${image}`;
+            console.log(pictureLink);
+            lightboxContainerImg.setAttribute("src", pictureLink);
+        })
 
         const divRealisation = document.createElement( 'div' );
         divRealisation.className = 'realisation';
@@ -248,11 +248,16 @@ function orderSelect(){ // Fonction liée au onchange de l'élément HTML <selec
 }
 
 
-function displayLightbox(id) {
+function displayLightbox(id, portrait) {
     console.log(id);
-    
+    console.log(portrait);
+    console.log(typeof(portrait));
     const divLightbox = document.querySelector(' .lightbox ');
     divLightbox.style.display = "block";
+    let lightboxContainerImg = document.querySelector( '.lightbox-container img' );
+    const pictureLink = `assets/creations/images/${portrait}`;
+    console.log(pictureLink);
+    lightboxContainerImg.setAttribute("src", pictureLink)
 }
 
 
