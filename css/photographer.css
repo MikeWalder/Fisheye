@@ -140,7 +140,7 @@ form textarea {
 
 .lightbox-close, .lightbox-prev, .lightbox-next {
     background-color: black;
-    color: white;
+    color: grey;
     padding: 10px;
     border: none;
     cursor: pointer;
@@ -169,12 +169,12 @@ form textarea {
 }
 
 .lightbox-close:hover {
-    color: grey;
+    color: white;
     cursor: pointer;
 }
 
 .lightbox-prev:hover, .lightbox-next:hover {
-    color: grey;
+    color: white;
     cursor: pointer;
 }
 

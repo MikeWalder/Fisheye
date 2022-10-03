@@ -28,6 +28,7 @@ async function getAllPicturesFromPhotographer(idPhotographer) {
                 albumData.push(data.media[i]);
             }
         }
+        console.log(albumData);
         return albumData;
     })
     .catch(err => console.log(err));
@@ -75,6 +76,9 @@ async function displayData(dataPhotographer){
     const photographerIntelsBox = photographerDetailsFactory(dataPhotographer[0]);
     const photographerDetailsDOM = photographerIntelsBox.getPhotographDetailsDOM();
     photographerDetails.appendChild(photographerDetailsDOM);
+
+    // Insertion des éléments du DOM nécessaires pour la lightbox
+
 }
 
 
@@ -128,7 +132,8 @@ function photographerContentFactory(data) { // Traitement des données des créa
             divLightbox.style.display = "block";
             let lightboxContainerImg = document.querySelector( '.lightbox-container img' );
             const pictureLink = `assets/creations/images/${image}`;
-            console.log(pictureLink);
+            console.log(data);
+            //console.log(pictureLink);
             lightboxContainerImg.setAttribute("src", pictureLink);
         })
 
