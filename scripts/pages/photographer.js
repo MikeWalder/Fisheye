@@ -51,7 +51,9 @@ async function displayData(dataPhotographer){
     contentOrderSelect.setAttribute("onchange", "orderSelect()");
 
     // Récupération des oeuvres du photographe sélectionné
-    const realisations = dataPhotographer.slice(1, dataPhotographer.length);
+    
+    //const realisations = dataPhotographer.slice(1, dataPhotographer.length);
+    const realisations = cuttingRealisationsFromDatas(dataPhotographer);
 
     // Récupération de la valeur du select
     const orderSelectValue = document.querySelector("#order-select").value;
@@ -78,7 +80,16 @@ async function displayData(dataPhotographer){
     photographerDetails.appendChild(photographerDetailsDOM);
 
     // Insertion des éléments du DOM nécessaires pour la lightbox
+    realisations.forEach((realisation) => {
+        
+    })
+}
 
+
+// Traitement datas
+function cuttingRealisationsFromDatas(datas){
+    const realisations = datas.slice(1, datas.length);
+    return realisations;
 }
 
 
@@ -214,6 +225,21 @@ async function init() {
     let findId = getIdParameter();
     const creationsPhotographer = await getAllPicturesFromPhotographer(findId);
     displayData(creationsPhotographer);
+
+    const divLightboxPrev = document.querySelector( '.lightbox-prev' );
+    divLightboxPrev.addEventListener('click', function() {
+        let creations = null;
+        creations = cuttingRealisationsFromDatas(creationsPhotographer);
+        console.log(creations);
+
+    })
+
+    const divLightboxNext = document.querySelector( '.lightbox-next' );
+    divLightboxNext.addEventListener('click', function() {
+        let creations = null;
+        creations = cuttingRealisationsFromDatas(creationsPhotographer);
+        console.log(creations);
+    })
 }
 
 
