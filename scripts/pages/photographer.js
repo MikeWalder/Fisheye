@@ -144,7 +144,7 @@ function photographerContentFactory(data) { // Traitement des données des créa
             let lightboxContainerImg = document.querySelector( '.lightbox-container img' );
             const pictureLink = `assets/creations/images/${image}`;
             console.log(data);
-            //console.log(pictureLink);
+            
             lightboxContainerImg.setAttribute("src", pictureLink);
         })
 
