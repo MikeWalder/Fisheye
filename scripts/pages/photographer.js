@@ -64,6 +64,7 @@ async function displayData(dataPhotographer){
             if(a[orderSelectValue] > b[orderSelectValue]) return 1;
             return 0;
         });
+        console.log(realisations);
     }
     
     // Partie insertion data et DOM des créations du photographe sélectionné
@@ -72,6 +73,9 @@ async function displayData(dataPhotographer){
         const userContentDOM = realisationModel.getUserDescDOM();
         photographerCreations.appendChild(userContentDOM);
     })
+
+    //Calcul du nombre total de likes dans l'encart
+
     dataPhotographer[0].totalLikes = countTotalLikes(realisations);
     
     // Partie insertion data et DOM dans l'encart en bas à droit de la page du photographe
@@ -99,6 +103,7 @@ function countTotalLikes(datas) {
     datas.forEach((data) => {
         totalLikes += data.likes;
     })
+
     return totalLikes;
 }
 
@@ -113,7 +118,7 @@ function photographerDetailsFactory(data){ // Traitement des données pour l'enc
 
         const divTotalLikes = document.createElement( 'div' );
         divTotalLikes.className = 'totalLikes';
-        divTotalLikes.innerHTML = totalLikes + '&nbsp;&#10084;'
+        divTotalLikes.innerHTML = totalLikes + '&nbsp;&#128149;'
 
         const dailyRate = document.createElement( 'div' );
         dailyRate.className = 'dailyRate';
@@ -150,7 +155,8 @@ function photographerContentFactory(data) { // Traitement des données des créa
 
         const divRealisation = document.createElement( 'div' );
         divRealisation.className = 'realisation';
-        divRealisation.innerHTML = '<span class="title">' + title + '</span><span class="likeCreation' + likes + '" onclick=addCreationLike('+`${likes}`+','+`${id}`+')>' + likes + '&nbsp;&#10084;</span>';
+        // onclick=addCreationLike('+`${likes}`+','+`${id}`+')
+        divRealisation.innerHTML = '<span class="title">' + title + '</span><span><span class="likeCreation' + likes + '" onclick=addCreationLike('+`${likes}`+')>' + likes + '</span><span class="heart' + likes + '">&nbsp;&#10084;</span></span>';
 
         if(typeof image !== 'undefined') {
             const pictureLink = `assets/creations/images/${image}`;
@@ -261,12 +267,34 @@ function closeModal() { // Fermeture du modal avec effet CSS
 }
 
 
-async function addCreationLike(likes, idCreation) { // Ajout d'un favori sur une oeuvre
-    const divLikeCreation = document.querySelector('.likeCreation' + likes);
-    console.log(likes);
-    console.log(idCreation);
-    divLikeCreation.style.color = 'red';
-    divLikeCreation.innerHTML = (likes + 1) + '&nbsp;&#10084;';
+async function addCreationLike(likes) { // Ajout d'un favori sur une oeuvre
+    const divLikeCreation = [...document.querySelectorAll(`[class^="likeCreation"]`)];
+    let totalCreationLikes = 0;
+    
+    
+    console.log(divLikeCreation);
+    
+    const divCreationSelected = document.querySelector('.likeCreation' + likes);
+    const heartCreationSelected = document.querySelector('.heart' + likes);
+    const classTotalLikes = document.querySelector('.totalLikes');
+
+    console.log(divCreationSelected);
+    divCreationSelected.innerHTML = likes + 1;
+    divCreationSelected.style.color = 'red';
+
+    divLikeCreation.forEach((likeCreation) => {
+        totalCreationLikes += parseInt(likeCreation.innerHTML);
+        console.log(typeof(likeCreation.innerHTML));
+    })
+    console.log(totalCreationLikes);
+
+    
+    heartCreationSelected.innerHTML = '<span>&#129505;</span>';
+    heartCreationSelected.style.color = "red";
+
+    classTotalLikes.innerHTML = '<span>' + totalCreationLikes + '&nbsp;&#128149;</span>';
+    // Ajouter le like supplémentaire dans le fichier
+
 
     let findId = getIdParameter();
     const creationsPhotographer = await getAllPicturesFromPhotographer(findId);
