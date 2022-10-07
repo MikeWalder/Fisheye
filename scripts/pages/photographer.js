@@ -28,7 +28,7 @@ async function getAllPicturesFromPhotographer(idPhotographer) {
                 albumData.push(data.media[i]);
             }
         }
-        console.log(albumData);
+        // console.log(albumData);
         return albumData;
     })
     .catch(err => console.log(err));
@@ -52,8 +52,8 @@ async function displayData(dataPhotographer){
 
     // Récupération des oeuvres du photographe sélectionné
     
-    //const realisations = dataPhotographer.slice(1, dataPhotographer.length);
     const realisations = cuttingRealisationsFromDatas(dataPhotographer);
+    console.log(realisations);
 
     // Récupération de la valeur du select
     const orderSelectValue = document.querySelector("#order-select").value;
@@ -68,10 +68,27 @@ async function displayData(dataPhotographer){
     }
     
     // Partie insertion data et DOM des créations du photographe sélectionné
+    let tabRealisations = [];
     realisations.forEach((realisation) => {
         const realisationModel = photographerContentFactory(realisation);
         const userContentDOM = realisationModel.getUserDescDOM();
         photographerCreations.appendChild(userContentDOM);
+        tabRealisations.push(realisationModel);
+    })
+    console.log(tabRealisations);
+
+    const divLightboxPrev = document.querySelector( '.lightbox-prev' );
+        divLightboxPrev.addEventListener('click', function() {
+            for(let i = 0; i < tabRealisations.length; i++){
+                if(tabRealisations[i].id == data.id){
+                    console.log('Hello there');
+                }
+            }
+        })
+
+    const divLightboxNext = document.querySelector( '.lightbox-next' );
+    divLightboxNext.addEventListener('click', function() {
+        
     })
 
     //Calcul du nombre total de likes dans l'encart
@@ -103,7 +120,6 @@ function countTotalLikes(datas) {
     datas.forEach((data) => {
         totalLikes += data.likes;
     })
-
     return totalLikes;
 }
 
@@ -148,7 +164,6 @@ function photographerContentFactory(data) { // Traitement des données des créa
             divLightbox.style.display = "block";
             let lightboxContainerImg = document.querySelector( '.lightbox-container img' );
             const pictureLink = `assets/creations/images/${image}`;
-            console.log(data);
             
             lightboxContainerImg.setAttribute("src", pictureLink);
         })
@@ -232,20 +247,9 @@ async function init() {
     const creationsPhotographer = await getAllPicturesFromPhotographer(findId);
     displayData(creationsPhotographer);
 
-    const divLightboxPrev = document.querySelector( '.lightbox-prev' );
-    divLightboxPrev.addEventListener('click', function() {
-        let creations = null;
-        creations = cuttingRealisationsFromDatas(creationsPhotographer);
-        console.log(creations);
-
-    })
-
-    const divLightboxNext = document.querySelector( '.lightbox-next' );
-    divLightboxNext.addEventListener('click', function() {
-        let creations = null;
-        creations = cuttingRealisationsFromDatas(creationsPhotographer);
-        console.log(creations);
-    })
+    let creations = null;
+    creations = cuttingRealisationsFromDatas(creationsPhotographer)
+    console.log(creations);
 }
 
 
@@ -286,7 +290,7 @@ async function addCreationLike(likes) { // Ajout d'un favori sur une oeuvre
         totalCreationLikes += parseInt(likeCreation.innerHTML);
         console.log(typeof(likeCreation.innerHTML));
     })
-    console.log(totalCreationLikes);
+    // console.log(totalCreationLikes);
 
     
     heartCreationSelected.innerHTML = '<span>&#129505;</span>';
@@ -295,10 +299,9 @@ async function addCreationLike(likes) { // Ajout d'un favori sur une oeuvre
     classTotalLikes.innerHTML = '<span>' + totalCreationLikes + '&nbsp;&#128149;</span>';
     // Ajouter le like supplémentaire dans le fichier
 
-
     let findId = getIdParameter();
     const creationsPhotographer = await getAllPicturesFromPhotographer(findId);
-    console.log(creationsPhotographer);
+    // console.log(creationsPhotographer);
 }
 
 
