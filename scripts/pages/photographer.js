@@ -76,23 +76,8 @@ async function displayData(dataPhotographer){
         tabRealisations.push(realisationModel);
     })
     console.log(tabRealisations);
-
-    const divLightboxPrev = document.querySelector( '.lightbox-prev' );
-        divLightboxPrev.addEventListener('click', function() {
-            for(let i = 0; i < tabRealisations.length; i++){
-                if(tabRealisations[i].id == data.id){
-                    console.log('Hello there');
-                }
-            }
-        })
-
-    const divLightboxNext = document.querySelector( '.lightbox-next' );
-    divLightboxNext.addEventListener('click', function() {
-        
-    })
-
+    
     //Calcul du nombre total de likes dans l'encart
-
     dataPhotographer[0].totalLikes = countTotalLikes(realisations);
     
     // Partie insertion data et DOM dans l'encart en bas à droit de la page du photographe
@@ -101,9 +86,6 @@ async function displayData(dataPhotographer){
     photographerDetails.appendChild(photographerDetailsDOM);
 
     // Insertion des éléments du DOM nécessaires pour la lightbox
-    realisations.forEach((realisation) => {
-        
-    })
 }
 
 
@@ -143,7 +125,7 @@ function photographerDetailsFactory(data){ // Traitement des données pour l'enc
         div.appendChild(divTotalLikes);
         div.appendChild(dailyRate);
 
-        return (div);
+        return div;
     }
     return { price, totalLikes, getPhotographDetailsDOM }
 }
@@ -152,23 +134,44 @@ function photographerDetailsFactory(data){ // Traitement des données pour l'enc
 function photographerContentFactory(data) { // Traitement des données des créations pour chaque photographe
     const { id, title, likes, image, video, date, price } = data;
 
+
+    // Partie gestion de l'affichage de la lightbox
+    const divContainCreation = document.createElement( 'div' );
+    divContainCreation.className = 'containCreation';
+
+    divContainCreation.addEventListener('click', function() {
+        const divLightbox = document.querySelector(' .lightbox ');
+        divLightbox.style.display = "block";
+        let lightboxContainerImg = document.querySelector( '.lightbox-container img' );
+        const pictureLink = `assets/creations/images/${image}`;
+        
+        lightboxContainerImg.setAttribute("src", pictureLink);
+
+        const divLightboxPrev = document.querySelector( '.lightbox-prev' );
+        divLightboxPrev.addEventListener('click', function() {
+            console.log(data);
+            
+            /* for(let i = 0; i < tabRealisations.length; i++){
+                if(tabRealisations[i].id == data.id){
+                    console.log('Hello there');
+                }
+            } */
+        })
+    })
+    
+
+    const divLightboxNext = document.querySelector( '.lightbox-next' );
+    divLightboxNext.addEventListener('click', function() {
+        
+    })
+
+
+
+
     function getUserDescDOM() { // Gestion DOM des créations du photographe
         const article = document.createElement( 'article' );
-
-        const divContainCreation = document.createElement( 'div' );
-        divContainCreation.className = 'containCreation';
-        
-        // Partie gestion de l'affichage de la lightbox
-        divContainCreation.addEventListener('click', function() {
-            const divLightbox = document.querySelector(' .lightbox ');
-            divLightbox.style.display = "block";
-            let lightboxContainerImg = document.querySelector( '.lightbox-container img' );
-            const pictureLink = `assets/creations/images/${image}`;
-            
-            lightboxContainerImg.setAttribute("src", pictureLink);
-        })
-
         const divRealisation = document.createElement( 'div' );
+
         divRealisation.className = 'realisation';
         // onclick=addCreationLike('+`${likes}`+','+`${id}`+')
         divRealisation.innerHTML = '<span class="title">' + title + '</span><span><span class="likeCreation' + likes + '" onclick=addCreationLike('+`${likes}`+')>' + likes + '</span><span class="heart' + likes + '">&nbsp;&#10084;</span></span>';
@@ -275,20 +278,19 @@ async function addCreationLike(likes) { // Ajout d'un favori sur une oeuvre
     const divLikeCreation = [...document.querySelectorAll(`[class^="likeCreation"]`)];
     let totalCreationLikes = 0;
     
-    
-    console.log(divLikeCreation);
+    // console.log(divLikeCreation);
     
     const divCreationSelected = document.querySelector('.likeCreation' + likes);
     const heartCreationSelected = document.querySelector('.heart' + likes);
     const classTotalLikes = document.querySelector('.totalLikes');
 
-    console.log(divCreationSelected);
+    // console.log(divCreationSelected);
     divCreationSelected.innerHTML = likes + 1;
     divCreationSelected.style.color = 'red';
 
     divLikeCreation.forEach((likeCreation) => {
         totalCreationLikes += parseInt(likeCreation.innerHTML);
-        console.log(typeof(likeCreation.innerHTML));
+        // console.log(typeof(likeCreation.innerHTML));
     })
     // console.log(totalCreationLikes);
 
