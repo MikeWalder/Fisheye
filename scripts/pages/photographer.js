@@ -112,11 +112,15 @@ function createLightboxDOM(image_datas){
 
         }
     })
+
+    console.log(tabImages);
+
     tabImages.forEach((tabData) => {
         const div = document.createElement('div');
         div.className = 'lightbox-container';
         const image = document.createElement('img');
-        image.setAttribute("src", tabData);
+        let linkData = `assets/creations/images/${tabData}`
+        image.setAttribute("src", linkData);
         div.appendChild(image);
         return div;
     })
