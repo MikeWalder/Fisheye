@@ -86,6 +86,9 @@ async function displayData(dataPhotographer){
     photographerDetails.appendChild(photographerDetailsDOM);
 
     // Insertion des éléments du DOM nécessaires pour la lightbox
+    let testTabImages = createLightboxDOM(realisations);
+    console.log(testTabImages);
+
 }
 
 
@@ -93,6 +96,30 @@ async function displayData(dataPhotographer){
 function cuttingRealisationsFromDatas(datas){
     const realisations = datas.slice(1, datas.length);
     return realisations;
+}
+
+
+// Listing des images / vidéos
+function createLightboxDOM(image_datas){
+    let tabImages = [];
+    image_datas.forEach((image) => {
+        if(image.image){
+            tabImages.push(image.image);
+
+        }
+        if(image.video){
+            tabImages.push(image.video);
+
+        }
+    })
+    tabImages.forEach((tabData) => {
+        const div = document.createElement('div');
+        div.className = 'lightbox-container';
+        const image = document.createElement('img');
+        image.setAttribute("src", tabData);
+        div.appendChild(image);
+        return div;
+    })
 }
 
 
@@ -108,7 +135,6 @@ function countTotalLikes(datas) {
 
 function photographerDetailsFactory(data){ // Traitement des données pour l'encart en bas à droite
     const { price, totalLikes } = data;
-    // console.log(totalLikes);
 
     function getPhotographDetailsDOM() { // Gestion DOM de l'encart
         const div = document.createElement( 'div' );
@@ -134,7 +160,6 @@ function photographerDetailsFactory(data){ // Traitement des données pour l'enc
 function photographerContentFactory(data) { // Traitement des données des créations pour chaque photographe
     const { id, title, likes, image, video, date, price } = data;
 
-
     // Partie gestion de l'affichage de la lightbox
     const divContainCreation = document.createElement( 'div' );
     divContainCreation.className = 'containCreation';
@@ -144,28 +169,21 @@ function photographerContentFactory(data) { // Traitement des données des créa
         divLightbox.style.display = "block";
         let lightboxContainerImg = document.querySelector( '.lightbox-container img' );
         const pictureLink = `assets/creations/images/${image}`;
-        
+        console.log(data);
         lightboxContainerImg.setAttribute("src", pictureLink);
 
         const divLightboxPrev = document.querySelector( '.lightbox-prev' );
         divLightboxPrev.addEventListener('click', function() {
             console.log(data);
             
-            /* for(let i = 0; i < tabRealisations.length; i++){
-                if(tabRealisations[i].id == data.id){
-                    console.log('Hello there');
-                }
-            } */
         })
+
+        const divLightboxNext = document.querySelector( '.lightbox-next' );
+        divLightboxNext.addEventListener('click', function() {
+            console.log(data);
+        })
+
     })
-    
-
-    const divLightboxNext = document.querySelector( '.lightbox-next' );
-    divLightboxNext.addEventListener('click', function() {
-        
-    })
-
-
 
 
     function getUserDescDOM() { // Gestion DOM des créations du photographe
