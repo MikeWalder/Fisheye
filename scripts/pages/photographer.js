@@ -176,12 +176,14 @@ function photographerContentFactory(data) { // Traitement des données des créa
         console.log(data);
         lightboxContainerImg.setAttribute("src", pictureLink);
 
+        // Flèche précédente de la lightbox
         const divLightboxPrev = document.querySelector( '.lightbox-prev' );
         divLightboxPrev.addEventListener('click', function() {
             console.log(data);
             
         })
 
+        // Flèche suivante de la lightbox
         const divLightboxNext = document.querySelector( '.lightbox-next' );
         divLightboxNext.addEventListener('click', function() {
             console.log(data);
